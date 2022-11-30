@@ -2,17 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { EthosConnectProvider } from 'ethos-connect';
+
+import { WalletProvider } from '@suiet/wallet-kit';
+import '@suiet/wallet-kit/style.css';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <EthosConnectProvider
-      ethosConfiguration={{
-        hideEmailSignIn: true // defaults to false
-      }}
-    >
-    <App /></EthosConnectProvider>
+    
+    <WalletProvider>
+    
+    <App />
+    </WalletProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import Cookies from "universal-cookie";
+import { ConnectButton } from '@suiet/wallet-kit';
 
 function Login({ setIsAuth }) {
   const [username, setUsername] = useState("");
@@ -24,6 +25,7 @@ function Login({ setIsAuth }) {
   return (
     <div className="login">
       <label> Login</label>
+     
 
       <input
         placeholder="Username"

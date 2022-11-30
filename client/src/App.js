@@ -6,6 +6,9 @@ import { Chat } from "stream-chat-react";
 import Cookies from "universal-cookie";
 import { useState } from "react";
 import { SignInButton } from 'ethos-connect'
+import { ConnectButton, useAccountBalance, useWallet, useSuiProvider } from "@suiet/wallet-kit";
+
+
 
 import JoinGame from "./components/JoinGame";
 
@@ -15,7 +18,7 @@ function App() {
   const token = cookies.get("token");
   const client = StreamChat.getInstance(api_key);
   const [isAuth, setIsAuth] = useState(false);
-
+  const wallet = useWallet();
   const logOut = () => {
     cookies.remove("token");
     cookies.remove("userId");
@@ -45,20 +48,29 @@ function App() {
       });
   }
   return (
-    <div className="App">
-      {isAuth ? (
+    <div className="App"> 
+       <ConnectButton />
+
+{!wallet.connected ? (
+  <>
+  <p>Connect DApp with Suiet wallet from now!</p></>
+    
+) : (
+       
+       
+   
+        <>
         <Chat client={client}>
           <JoinGame />
           <button onClick={logOut}> Log Out</button>
-        </Chat>
-      ) : (
-        <>
-          <SignUp setIsAuth={setIsAuth} />
-          <Login setIsAuth={setIsAuth} />
-          <SignInButton>CONNECT YOUR WALLET</SignInButton>
+        </Chat> 
+        
+          
+ 
+
         </>
-      )}
-    </div>
+      )}    
+   </div>      
   );
 }
 
